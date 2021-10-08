@@ -3,6 +3,7 @@ import App from './App.vue'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import './registerServiceWorker'
+import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Buefy)
 

@@ -3,16 +3,16 @@
   <h4 class="title is-4 has-text-centered">My Events</h4>
   <div class="box" v-for="event in favorited" :key="event.name">
     <p class="title is-6 is-inline">{{event.name}}</p>
-    <b-button class="is-pulled-right is-inline" />
+    <img src="@/assets/logo.png" class="is-pulled-right is-inline neb-icon" alt="Nebraska Icon" />
     <br>
-    <b-button />
-    Date
+    <b-icon icon="calendar" />
+    {{event.date}}
     <br>
-    <b-button />
-    Major
+    <b-icon icon="school" />
+    {{event.major}}
     <br>
-    <b-button />
-    Place
+    <b-icon icon="map-marker" />
+    {{event.place}}
   </div>
 </div>
 </template>
