@@ -1,0 +1,20 @@
+[
+    {
+        "name": "IEEE Weekly Meeting",
+        "expanded": false,
+        "description": "Blah"
+    },
+    {
+        "name": "Ice Cream Social",
+        "favorited": true,
+        "expanded": false
+    },
+    {
+        "name": "UNL Rugby vs. Omaha Rugby",
+        "expanded": false
+    },
+    {
+        "name": "Dance Marathon Party at Union",
+        "expanded": false
+    }
+]
