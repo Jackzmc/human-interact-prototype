@@ -3,8 +3,8 @@
     <div class="container is-fluid">
       <div class="columns">
         <div class="column ">
-          <NavBar @search="onSearch" :events="events" />
-          <EventList :searchQuery="searchQuery" :events="events"/>
+          <NavBar @filter="onFilter" :events="events" />
+          <EventList :filter="filter" :events="events"/>
         </div>
         <div class="column is-4">
           <FavoriteList :events="events" />
@@ -31,13 +31,13 @@ export default {
   },
   data() {
     return {
-      searchQuery: null,
+      filter: null,
       events: getEvents()
     }
   },
   methods: {
-    onSearch(query) {
-      this.searchQuery = query
+    onFilter(filter) {
+      this.filter = filter
     }
   },
   created() {
