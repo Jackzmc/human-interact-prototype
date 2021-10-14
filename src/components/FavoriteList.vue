@@ -2,17 +2,25 @@
 <div class="box">
   <h4 class="title is-4 has-text-centered">My Events</h4>
   <div class="box" v-for="event in favorited" :key="event.name">
-    <p class="title is-6 is-inline">{{event.name}}</p>
+    <a class="title is-6 is-inline" @click="expandEvent(event)">
+      {{event.name}}
+    </a>
     <img src="@/assets/logo.png" class="is-pulled-right is-inline neb-icon" alt="Nebraska Icon" />
-    <br>
-    <b-icon icon="calendar" />
-    {{event.date}}
-    <br>
-    <b-icon icon="school" />
-    {{event.major}}
-    <br>
-    <b-icon icon="map-marker" />
-    {{event.place}}
+    <template v-if="event.date">
+      <br>
+      <b-icon icon="calendar" />
+      {{event.date}}
+    </template>
+    <template v-if="event.major">
+      <br>
+      <b-icon icon="school" />
+      {{event.major}}
+    </template>
+    <template v-if="event.place">
+      <br>
+      <b-icon icon="map-marker" />
+      {{event.place}}
+    </template>
   </div>
 </div>
 </template>
@@ -26,6 +34,12 @@ export default {
   computed: {
     favorited() {
       return this.events.filter(event => event.favorited)
+    }
+  },
+  methods: {
+    expandEvent(event) {
+      event.expanded = true
+      this.$parent.$emit('modifyEvent', event)
     }
   }
 }
