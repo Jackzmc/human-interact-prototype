@@ -5,15 +5,42 @@
       <b-datepicker
         v-model="date"
         placeholder="Click to select..."
-        icon="calendar-today"
+        icon="calendar-multiselect"
         icon-right-clickable
-        trap-focus>
+        trap-focus
+        multiple
+        :events="datePickerEvents"
+      >
+        <div class="buttons">
+          <b-button
+            label="Today"
+            type="is-primary"
+            icon-left="calendar-today"
+            @click="date = new Date()"
+          />
+
+          <b-button
+            label="Tomorrow"
+            type="is-secondary"
+            icon-left="calendar"
+            @click="date = tomorrowDate"
+          />
+
+          <b-button
+            label="Clear"
+            type="is-danger"
+            icon-left="close"
+            outlined
+            @click="date = null"
+          />
+        </div>
       </b-datepicker>
     </b-field>
     <b-field label="Major">
       <b-select placeholder="Select a major" v-model="major" icon="school">
+        <option value="">Any</option>
         <option
-          v-for="option in $options.MAJORS"
+          v-for="option in majors"
           :value="option"
           :key="option">
           {{ option}}
@@ -22,8 +49,9 @@
     </b-field>
     <b-field label="Place">
       <b-select placeholder="Select a place" v-model="place" icon="map-marker">
+        <option value="">Any</option>
         <option
-          v-for="option in $options.PLACES"
+          v-for="option in places"
           :value="option"
           :key="option">
           {{ option}}
@@ -31,7 +59,7 @@
       </b-select>
     </b-field>
     <b-field label="Search">
-      <b-input @input="search" v-model.lazy="searchText" type="text" placeholder="Search" icon="magnify" />
+      <b-input v-model.lazy="searchText" type="text" placeholder="Search" icon="magnify" />
     </b-field>
   </b-field>
 </div>
@@ -39,12 +67,10 @@
 
 <script>
 
-import { getData } from '@/js/data.js'
-const data = getData()
-
 export default {
-  MAJORS: data.majors,
-  PLACES: data.places,
+  props: {
+    events: Array
+  },
   data() {
     return {
       searchText: null,
@@ -53,9 +79,50 @@ export default {
       date: null
     }
   },
-  methods: {
-    search() {
-      this.$emit('search', this.searchText.toLowerCase())
+  computed: {
+    majors() {
+      const majors = []
+      this.events.forEach(event => {
+        if(event.major && !majors.includes(event.major)) majors.push(event.major)
+      })
+      return majors
+    },
+    places() {
+      const places = []
+      this.events.forEach(event => {
+        if(event.place && !places.includes(event.place)) places.push(event.place)
+      })
+      return places
+    },
+    tomorrowDate() {
+      const today = new Date()
+      const tomorrow = new Date(today)
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      return tomorrow
+    },
+    filter() {
+      return {
+        search: this.searchText ? this.searchText.toLowerCase() : null,
+        major: this.major ? this.major : null,
+        place: this.place ? this.place : null,
+        date: this.date
+      }
+    },
+    datePickerEvents() {
+      return this.events
+        .filter(event => {
+          return event.date && event.date instanceof Date && !isNaN(event.data)
+        })
+        .map(event => {
+          return {
+            date: new Date(event.date)
+          }
+        })
+    }
+  },
+  watch: {
+    filter() {
+      this.$emit('filter', this.filter)
     }
   }
 }
