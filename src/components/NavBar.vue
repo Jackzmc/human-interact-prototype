@@ -39,21 +39,12 @@
 
 <script>
 
-const MAJORS = [
-  "Major 1",
-  "Major 2",
-  "Major 3"
-]
-
-const PLACES = [
-  "Place 1",
-  "Place 2",
-  "Place 3"
-]
+import { getData } from '@/js/data.js'
+const data = getData()
 
 export default {
-  MAJORS,
-  PLACES,
+  MAJORS: data.majors,
+  PLACES: data.places,
   data() {
     return {
       searchText: null,
