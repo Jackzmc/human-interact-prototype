@@ -3,11 +3,11 @@
     <div class="container is-fluid">
       <div class="columns">
         <div class="column ">
-          <NavBar @search="onSearch" />
-          <EventList :searchQuery="searchQuery"/>
+          <NavBar @search="onSearch" :events="events" />
+          <EventList :searchQuery="searchQuery" :events="events"/>
         </div>
         <div class="column is-4">
-          <FavoriteList />
+          <FavoriteList :events="events" />
         </div>
       </div>
     </div>
@@ -20,6 +20,8 @@ import EventList from '@/components/EventList'
 import FavoriteList from '@/components/FavoriteList'
 import NavBar from '@/components/NavBar'
 
+import { getEvents } from '@/js/data.js'
+
 export default {
   name: 'App',
   components: {
@@ -29,13 +31,23 @@ export default {
   },
   data() {
     return {
-      searchQuery: null
+      searchQuery: null,
+      events: getEvents()
     }
   },
   methods: {
     onSearch(query) {
       this.searchQuery = query
     }
+  },
+  created() {
+    this.$on('modifyEvent', (event) => {
+      const index = this.events.indexOf(event)
+      console.log(event.name, index)
+      if(index !== -1) {
+        this.$set(this.events, index, event)
+      }
+    })
   }
 }
 </script>
