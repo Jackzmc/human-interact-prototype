@@ -2,9 +2,11 @@
 <div class="box">
   <h4 class="title is-4 has-text-centered">Upcoming Events</h4>
   <div class="box" v-for="event in filtered" :key="event.name">
-    <p class="subtitle is-4 is-inline">{{event.name}}</p>
+    <a class="subtitle is-4 is-inline" @click="toggleEventExpanded(event)">
+      {{event.name}}
+    </a>
     <span class="is-pulled-right is-inline buttons">
-      <a>
+      <a class="button">
         <img @click="toggleFavorited(event)" v-if="event.favorited" src="@/assets/logo.png" class="neb-icon" alt="Nebraska Icon" />
         <img @click="toggleFavorited(event)" v-else src="@/assets/logo-empty.jpg" class="neb-icon" alt="Empty Nebraska Icon" />
       </a>
@@ -13,6 +15,21 @@
     <template v-if="event.expanded">
       <br><br>
       <p>{{event.description}}</p>
+      <template v-if="event.date">
+        <br>
+        <b-icon icon="calendar" />
+        {{event.date}}
+      </template>
+      <template v-if="event.major">
+        <br>
+        <b-icon icon="school" />
+        {{event.major}}
+      </template>
+      <template v-if="event.place">
+        <br>
+        <b-icon icon="map-marker" />
+        {{event.place}}
+      </template>
     </template>
   </div>
 </div>
@@ -22,7 +39,7 @@
 
 export default {
   props: {
-    searchQuery: String,
+    filter: Object,
     events: Array
   },
   methods: {
@@ -37,11 +54,15 @@ export default {
   },
   computed: {
     filtered() {
-      if(this.searchQuery) {
-        return this.events.filter(event => event.name.toLowerCase().includes(this.searchQuery))
-      } else {
-        return this.events
-      }
+      if(!this.filter) return this.events
+      const { date, major, place, search } = this.filter
+      return this.events
+        .filter(event => {
+          return (!search || event.name.toLowerCase().includes(search)) &&
+            (!date || event.date === date) &&
+            (!major || event.major === major) &&
+            (!place || event.place === place)
+        })
     }
   }
 }
