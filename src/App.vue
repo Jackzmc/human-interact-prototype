@@ -38,6 +38,11 @@ export default {
   methods: {
     onFilter(filter) {
       this.filter = filter
+    },
+    reloadPage() {
+      if (!this.updateRegistration || !this.updateRegistration.waiting) return
+      this.updateRegistration.waiting.postMessage({ type: 'SKIP_WAITING' })
+      window.location.reload()
     }
   },
   created() {
@@ -48,6 +53,7 @@ export default {
         this.$set(this.events, index, event)
       }
     })
+    document.addEventListener('swUpdated', () => this.reloadPage(), { once: true })
   }
 }
 </script>
