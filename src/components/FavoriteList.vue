@@ -18,13 +18,10 @@
 </template>
 
 <script>
-import events from '@/js/events'
 
 export default {
-  data() {
-    return {
-      events: events()
-    }
+  props: {
+    events: Array
   },
   computed: {
     favorited() {
