@@ -2,13 +2,16 @@
     "events": [
         {
             "name": "IEEE Weekly Meeting",
-            "description": "A meeting that is weekly, for that IEEE"
+            "description": "A meeting that is weekly, for that IEEE",
+            "major": "Bakery Science",
+            "place": "Pizza Hut",
+            "date": "10/02/2021"
         },
         {
             "name": "Ice Cream Social",
             "favorited": true,
             "place": "Union",
-            "major": "Computer Science",
+            "major": "Golf Turf Management",
             "date": "Tomorrow",
             "description": "An event where you acquire an element of the perdiodic table which is ice cream, not to be confused with 'ice', it is slightly different."
         },
@@ -20,6 +23,13 @@
             "name": "Dance Marathon Party at Union",
             "place": "Union",
             "description": "It's a party. Where you dance. At the union."
+        },
+        {
+            "name": "Generic Plant Sciences Club",
+            "place": "Union",
+            "description": "Plants are green. Agriculture.",
+            "major": "Plant Sciences",
+            "date": "10/29/2021"
         }
     ]
 }
