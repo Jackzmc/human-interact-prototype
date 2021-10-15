@@ -55,11 +55,12 @@ export default {
   computed: {
     filtered() {
       if(!this.filter) return this.events
-      const { date, major, place, search } = this.filter
+      const { dates, major, place, search } = this.filter
       return this.events
         .filter(event => {
+          const date = event.date && !isNaN(Date.parse(event.date)) ? new Date(event.date).valueOf() : null
           return (!search || event.name.toLowerCase().includes(search)) &&
-            (!date || event.date === date) &&
+            (!dates || (date && dates.some(d => d.valueOf() === date))) &&
             (!major || event.major === major) &&
             (!place || event.place === place)
         })
