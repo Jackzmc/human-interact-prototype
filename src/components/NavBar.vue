@@ -3,7 +3,7 @@
   <b-field horizontal>
     <b-field label="Date">
       <b-datepicker
-        v-model="date"
+        v-model="dates"
         placeholder="Click to select..."
         icon="calendar-multiselect"
         icon-right-clickable
@@ -76,7 +76,7 @@ export default {
       searchText: null,
       place: null,
       major: null,
-      date: null
+      dates: []
     }
   },
   computed: {
@@ -105,13 +105,13 @@ export default {
         search: this.searchText ? this.searchText.toLowerCase() : null,
         major: this.major ? this.major : null,
         place: this.place ? this.place : null,
-        date: this.date
+        dates: this.dates
       }
     },
     datePickerEvents() {
       return this.events
         .filter(event => {
-          return event.date && event.date instanceof Date && !isNaN(event.data)
+          return event.date && !isNaN(Date.parse(event.date))
         })
         .map(event => {
           return {
