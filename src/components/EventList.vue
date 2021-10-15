@@ -59,11 +59,25 @@ export default {
       return this.events
         .filter(event => {
           const date = event.date && !isNaN(Date.parse(event.date)) ? new Date(event.date).valueOf() : null
-          return (!search || event.name.toLowerCase().includes(search)) &&
-            (!dates || (date && dates.some(d => d.valueOf() === date))) &&
+          const isValidSearchResult = search ? event.name.toLowerCase().includes(search) ||
+            (event.major && event.major.toLowerCase().includes(search)) ||
+            (event.place && event.place.toLowerCase().includes(search)) ||
+            (event.description && event.description.toLowerCase().includes(search))
+            : true
+
+          if(process.env.NODE_ENV !== 'production') {
+            console.log(event.name, ':: search', isValidSearchResult)
+            console.log(event.name, ':: date', (!dates || (date && dates.some(d => d.valueOf() === date))))
+            console.log(event.name, ':: major', (!major || event.major === major))
+            console.log(event.name, ':: place', (!place || event.place === place))
+          }
+
+          return isValidSearchResult &&
+            (dates.length === 0 || (date && dates.some(d => d.valueOf() === date))) &&
             (!major || event.major === major) &&
             (!place || event.place === place)
         })
+        .sort(event => event.date)
     }
   }
 }
