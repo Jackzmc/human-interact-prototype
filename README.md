@@ -10,24 +10,29 @@ Functionality of most tasks is completely functional and usable.
 
 Lastly, the website is built with "Buefy" which is Vue.JS + Bulma (CSS esign framework), which is a mobile-friendly support. In addition, the site is created with PWA (Progress Web App), so it is ready for mobiles and in fact can be installed on mobile devices like a native app.
 
+
+## Requirements
+
+Requires NodeJS which should include npm. Run `npm i` to run, and `npm serve` to run a development website at http://localhost:8080
+
 ## Project setup
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+npm run build
 ```
 
 ### Lints and fixes files
 ```
-yarn lint
+npm run lint
 ```
 
 ### Customize configuration
