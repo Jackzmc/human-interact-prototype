@@ -2,34 +2,35 @@
     "events": [
         {
             "name": "IEEE Weekly Meeting",
-            "expanded": false,
-            "description": "Blah"
+            "description": "A meeting that is weekly, for that IEEE",
+            "major": "Bakery Science",
+            "place": "Pizza Hut",
+            "date": "10/02/2021"
         },
         {
             "name": "Ice Cream Social",
             "favorited": false,
             "expanded": false,
             "place": "Union",
-            "major": "Computer Science",
-            "date": "Tomorrow"
+            "major": "Golf Turf Management",
+            "date": "Tomorrow",
+            "description": "An event where you acquire an element of the perdiodic table which is ice cream, not to be confused with 'ice', it is slightly different."
         },
         {
             "name": "UNL Rugby vs. Omaha Rugby",
-            "expanded": false
+            "description": "Sports event, somewhere in the city."
         },
         {
             "name": "Dance Marathon Party at Union",
-            "expanded": false
+            "place": "Union",
+            "description": "It's a party. Where you dance. At the union."
+        },
+        {
+            "name": "Generic Plant Sciences Club",
+            "place": "Union",
+            "description": "Plants are green. Agriculture.",
+            "major": "Plant Sciences",
+            "date": "10/29/2021"
         }
-    ],
-    "majors": [
-        "Major 1",
-        "Major 2",
-        "Major 3"
-    ],
-    "places": [
-        "Place 1",
-        "Place 2",
-        "Place 3"
     ]
 }
