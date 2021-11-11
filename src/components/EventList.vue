@@ -6,9 +6,9 @@
       {{event.name}}
     </a>
     <span class="is-pulled-right is-inline buttons">
-      <a class="button">
-        <img @click="toggleFavorited(event)" v-if="event.favorited" src="@/assets/logo.png" class="neb-icon" alt="Nebraska Icon" />
-        <img @click="toggleFavorited(event)" v-else src="@/assets/logo-empty.jpg" class="neb-icon" alt="Empty Nebraska Icon" />
+      <a class="button" @click="toggleFavorited(event)">
+        <img v-if="event.favorited" src="@/assets/logo.png" class="neb-icon" alt="Nebraska Icon" />
+        <img v-else src="@/assets/logo-empty.jpg" class="neb-icon" alt="Empty Nebraska Icon" />
       </a>
       <b-button :icon-left="event.expanded ? 'chevron-up' : 'chevron-down'" @click="toggleEventExpanded(event)"/>
     </span>
