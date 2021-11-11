@@ -7,7 +7,7 @@
         },
         {
             "name": "Ice Cream Social",
-            "favorited": true,
+            "favorited": false,
             "expanded": false,
             "place": "Union",
             "major": "Computer Science",
