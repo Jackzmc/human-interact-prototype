@@ -16,14 +16,14 @@
             label="Today"
             type="is-primary"
             icon-left="calendar-today"
-            @click="date = new Date()"
+            @click="addDate(new Date())"
           />
 
           <b-button
             label="Tomorrow"
             type="is-secondary"
             icon-left="calendar"
-            @click="date = tomorrowDate"
+            @click="addDate(tomorrowDate)"
           />
 
           <b-button
@@ -31,7 +31,7 @@
             type="is-danger"
             icon-left="close"
             outlined
-            @click="date = null"
+            @click="dates = []"
           />
         </div>
       </b-datepicker>
@@ -39,12 +39,14 @@
     <b-field label="Major">
       <b-select placeholder="Select a major" v-model="major" icon="school">
         <option value="">Any</option>
-        <option
-          v-for="option in majors"
-          :value="option"
-          :key="option">
-          {{ option}}
-        </option>
+        <optgroup v-for="(list, category) in majors" :key="category" :label="category">
+          <option
+            v-for="option in list"
+            :value="option"
+            :key="option">
+            {{ option}}
+          </option>
+        </optgroup>
       </b-select>
     </b-field>
     <b-field label="Place">
@@ -69,7 +71,8 @@
 
 export default {
   props: {
-    events: Array
+    events: Array,
+    majors: Object // Record<category, majors[]>
   },
   data() {
     return {
@@ -80,13 +83,6 @@ export default {
     }
   },
   computed: {
-    majors() {
-      const majors = []
-      this.events.forEach(event => {
-        if(event.major && !majors.includes(event.major)) majors.push(event.major)
-      })
-      return majors
-    },
     places() {
       const places = []
       this.events.forEach(event => {
@@ -123,6 +119,14 @@ export default {
   watch: {
     filter() {
       this.$emit('filter', this.filter)
+    }
+  },
+  methods: {
+    addDate(date = new Date()) {
+      if(!this.dates.includes(date)) {
+        console.log(this.dates, 'add', date)
+        this.dates.push(date)
+      }
     }
   }
 }

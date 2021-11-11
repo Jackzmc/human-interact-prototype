@@ -12,7 +12,7 @@ export function getEvents() {
 
 export function getData() {
   return {
-    majors: data.majors,
-    places: data.places
+    majors: data.majors || {},
+    places: data.places || []
   }
 }

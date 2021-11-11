@@ -32,5 +32,16 @@
             "major": "Plant Sciences",
             "date": "10/29/2021"
         }
-    ]
+    ],
+    "majors": {
+        "Agriculture": [
+            "Plant Sciences"
+        ],
+        "Engineering": [
+            "Software Engineering"
+        ],
+        "Other": [
+            "Golf Turf Management"
+        ]
+    }
 }

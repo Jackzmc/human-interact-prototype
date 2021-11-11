@@ -3,7 +3,7 @@
     <div class="container is-fluid">
       <div class="columns">
         <div class="column ">
-          <NavBar @filter="onFilter" :events="events" />
+          <NavBar @filter="onFilter" :events="events" :majors="data.majors" />
           <EventList :filter="filter" :events="events"/>
         </div>
         <div class="column is-4">
@@ -20,7 +20,7 @@ import EventList from '@/components/EventList'
 import FavoriteList from '@/components/FavoriteList'
 import NavBar from '@/components/NavBar'
 
-import { getEvents } from '@/js/data.js'
+import { getEvents, getData } from '@/js/data.js'
 
 export default {
   name: 'App',
@@ -32,7 +32,8 @@ export default {
   data() {
     return {
       filter: null,
-      events: getEvents()
+      events: getEvents(),
+      data: getData()
     }
   },
   methods: {
@@ -48,7 +49,6 @@ export default {
   created() {
     this.$on('modifyEvent', (event) => {
       const index = this.events.indexOf(event)
-      console.log(event.name, index)
       if(index !== -1) {
         this.$set(this.events, index, event)
       }
