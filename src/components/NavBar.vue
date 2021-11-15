@@ -61,7 +61,15 @@
       </b-select>
     </b-field>
     <b-field label="Search">
-      <b-input v-model.lazy="searchText" type="text" placeholder="Search" icon="magnify" />
+      <b-input
+        v-model.lazy="searchText"
+        type="text"
+        placeholder="Search"
+        icon="magnify"
+        :icon-right="searchText && searchText.length ? 'backspace' : null"
+        icon-right-clickable
+        @icon-right-click="searchText = null"
+      />
     </b-field>
   </b-field>
 </div>
